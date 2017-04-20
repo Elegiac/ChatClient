@@ -33,7 +33,18 @@ public class Connection {
 
 	public static String sendMessgaeAndReply(String msg) {
 		channel.writeAndFlush(msg + "\r\n");
+		
+		try {
+			synchronized(message){
+				message.wait();
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		return message.getMessage();
 	}
+	
+	
 
 }

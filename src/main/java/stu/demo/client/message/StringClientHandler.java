@@ -16,6 +16,9 @@ public class StringClientHandler extends SimpleChannelInboundHandler<String> {
 	protected void channelRead0(ChannelHandlerContext ctx, String msg)
 			throws Exception {
 		message.setMessage(msg);
+		synchronized(message){
+			message.notify();
+		}
 		System.out.println("Server say : " + msg);
 	}
 
