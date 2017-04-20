@@ -15,7 +15,8 @@ public class BaseFrame extends JFrame {
 		SCREENSIZE = Toolkit.getDefaultToolkit().getScreenSize();
 	}
 
-	public BaseFrame(int width, int height) {
+	public BaseFrame(int width, int height, String title) {
+		setTitle(title);
 		// 关闭窗体时关闭程序
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(width, height);

@@ -19,7 +19,7 @@ public class Dashboard extends BaseFrame {
 	private static Dashboard dashboard;
 
 	private Dashboard(int width, int height) {
-		super(width, height);
+		super(width, height, "dashboard");
 
 		JPanel messageViewContainer = new JPanel();
 		messageViewContainer.setLayout(new BorderLayout());
@@ -82,5 +82,9 @@ public class Dashboard extends BaseFrame {
 			}
 			dashboard = new Dashboard(size, size);
 		}
+	}
+
+	public static void main(String[] args) {
+		generate();
 	}
 }
