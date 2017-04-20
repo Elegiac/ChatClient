@@ -50,6 +50,7 @@ public class Dashboard extends BaseFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String sendMessage = messageInputArea.getText();
+				messageInputArea.setText("");
 				String receiveMessage = Connection
 						.sendMessgaeAndReply(sendMessage);
 				messageViewArea.append("Me:" + sendMessage);

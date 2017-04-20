@@ -11,13 +11,13 @@ public class Connection {
 	static EventLoopGroup group = new NioEventLoopGroup();
 	static Channel channel = null;
 
-	private static Message message = new Message();
+	static Message message = new Message();
 
 	public static void startup() {
 		try {
 			Bootstrap b = new Bootstrap();
 			b.group(group).channel(NioSocketChannel.class)
-					.handler(new StringClientInitializer(message));
+					.handler(new StringClientInitializer());
 
 			// 连接服务端
 			channel = b.connect("127.0.0.1", 8878).sync().channel();
@@ -33,18 +33,16 @@ public class Connection {
 
 	public static String sendMessgaeAndReply(String msg) {
 		channel.writeAndFlush(msg + "\r\n");
-		
+
 		try {
-			synchronized(message){
+			synchronized (message) {
 				message.wait();
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+
 		return message.getMessage();
 	}
-	
-	
 
 }

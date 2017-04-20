@@ -7,15 +7,8 @@ import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import io.netty.handler.codec.Delimiters;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
-import stu.demo.entity.Message;
 
 public class StringClientInitializer extends ChannelInitializer<SocketChannel> {
-
-	private Message message;
-
-	public StringClientInitializer(Message message) {
-		this.message = message;
-	}
 
 	@Override
 	protected void initChannel(SocketChannel ch) throws Exception {
@@ -32,6 +25,6 @@ public class StringClientInitializer extends ChannelInitializer<SocketChannel> {
 		pipeline.addLast("encoder", new StringEncoder());
 
 		// 客户端的逻辑
-		pipeline.addLast("handler", new StringClientHandler(message));
+		pipeline.addLast("handler", new StringClientHandler());
 	}
 }
