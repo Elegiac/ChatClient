@@ -1,10 +1,11 @@
 package stu.demo;
 
+import stu.demo.client.ClientManager;
+
 public class Application {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		ClientManager.startup();
 	}
 
 }
