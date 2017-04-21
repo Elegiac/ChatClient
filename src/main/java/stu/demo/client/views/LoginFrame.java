@@ -1,13 +1,20 @@
 package stu.demo.client.views;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import edu.demo.common.entity.Login;
+import edu.demo.common.utils.JsonUtil;
+import stu.demo.client.message.Connection;
 
 public class LoginFrame extends BaseFrame {
 
@@ -20,34 +27,59 @@ public class LoginFrame extends BaseFrame {
 
 		setLayout(new BorderLayout());
 
-		JPanel north = new JPanel();
-		north.setBackground(Color.BLUE);
-
-		JPanel west = new JPanel();
-		west.setBackground(Color.GREEN);
-
-		JPanel east = new JPanel();
-		east.setBackground(Color.RED);
-
 		JPanel center = new JPanel();
-		center.setBackground(Color.CYAN);
 
 		JPanel south = new JPanel();
-		south.setBackground(Color.YELLOW);
 
-		south.add(new JButton("login"));
-		south.add(new JButton("reset"));
+		final JTextField userNameInput = new JTextField();
+		final JPasswordField passwordInput = new JPasswordField();
 
-		JTextField userNameInput = new JTextField();
-		JPasswordField passwordInput = new JPasswordField();
+		center.setLayout(new GridLayout(9, 1));
 
-		center.add(userNameInput);
-		center.add(passwordInput);
+		Box userNameBox = Box.createHorizontalBox();
+		userNameBox.add(Box.createHorizontalStrut(20));
+		userNameBox.add(new JLabel("userName:"));
+		userNameBox.add(userNameInput);
+		userNameBox.add(Box.createHorizontalStrut(20));
 
-		add(north, BorderLayout.NORTH);
+		Box passwordBox = Box.createHorizontalBox();
+		passwordBox.add(Box.createHorizontalStrut(20));
+		passwordBox.add(new JLabel("password:"));
+		passwordBox.add(passwordInput);
+		passwordBox.add(Box.createHorizontalStrut(20));
+
+		center.add(Box.createVerticalGlue());
+		center.add(Box.createVerticalGlue());
+		center.add(Box.createVerticalGlue());
+		center.add(userNameBox);
+		center.add(Box.createVerticalGlue());
+		center.add(passwordBox);
+
+		
+		JButton login = new JButton("login");
+		JButton reset = new JButton("reset");
+		
+		
+		login.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String loginName = userNameInput.getText();
+				String password = passwordInput.getText();
+				
+				Login login = new Login();
+				login.setLoginName(loginName);
+				login.setPassword(password);
+				String receiveMessage = Connection
+						.sendMessgaeAndReply(JsonUtil.objectToJson(login));
+				System.out.println(receiveMessage);
+			}
+		});
+
+		south.add(login);
+		south.add(reset);
+		
+		
 		add(south, BorderLayout.SOUTH);
-		add(west, BorderLayout.WEST);
-		add(east, BorderLayout.EAST);
 		add(center, BorderLayout.CENTER);
 
 		setVisible(true);

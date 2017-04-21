@@ -5,7 +5,6 @@ import io.netty.channel.Channel;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import stu.demo.entity.Message;
 
 public class Connection {
 	static EventLoopGroup group = new NioEventLoopGroup();
@@ -45,4 +44,15 @@ public class Connection {
 		return message.getMessage();
 	}
 
+	static class Message {
+		private String message;
+
+		public String getMessage() {
+			return message;
+		}
+
+		public void setMessage(String message) {
+			this.message = message;
+		}
+	}
 }
