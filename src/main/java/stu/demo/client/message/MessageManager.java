@@ -6,7 +6,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
-public class Connection {
+public class MessageManager {
 	static EventLoopGroup group = new NioEventLoopGroup();
 	static Channel channel = null;
 

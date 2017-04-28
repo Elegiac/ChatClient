@@ -8,9 +8,9 @@ public class StringClientHandler extends SimpleChannelInboundHandler<String> {
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, String msg)
 			throws Exception {
-		Connection.message.setMessage(msg);
-		synchronized (Connection.message) {
-			Connection.message.notify();
+		MessageManager.message.setMessage(msg);
+		synchronized (MessageManager.message) {
+			MessageManager.message.notify();
 		}
 		System.out.println("Server say : " + msg);
 	}

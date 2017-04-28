@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import stu.demo.client.message.Connection;
+import stu.demo.client.message.MessageManager;
 
 public class Dashboard extends BaseFrame {
 
@@ -51,7 +51,7 @@ public class Dashboard extends BaseFrame {
 			public void actionPerformed(ActionEvent e) {
 				String sendMessage = messageInputArea.getText();
 				messageInputArea.setText("");
-				String receiveMessage = Connection
+				String receiveMessage = MessageManager
 						.sendMessgaeAndReply(sendMessage);
 				messageViewArea.append("Me:" + sendMessage);
 				messageViewArea.append("\r\n");

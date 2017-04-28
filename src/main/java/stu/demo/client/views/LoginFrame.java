@@ -12,9 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import edu.demo.common.entity.Login;
+import stu.demo.client.message.MessageManager;
+import edu.demo.common.entity.action.Login;
 import edu.demo.common.utils.JsonUtil;
-import stu.demo.client.message.Connection;
 
 public class LoginFrame extends BaseFrame {
 
@@ -55,21 +55,18 @@ public class LoginFrame extends BaseFrame {
 		center.add(Box.createVerticalGlue());
 		center.add(passwordBox);
 
-		
 		JButton login = new JButton("login");
 		JButton reset = new JButton("reset");
-		
-		
+
 		login.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String loginName = userNameInput.getText();
 				String password = passwordInput.getText();
-				
-				Login login = new Login();
-				login.setLoginName(loginName);
-				login.setPassword(password);
-				String receiveMessage = Connection
+
+				Login login = new Login(loginName, password);
+
+				String receiveMessage = MessageManager
 						.sendMessgaeAndReply(JsonUtil.objectToJson(login));
 				System.out.println(receiveMessage);
 			}
@@ -77,8 +74,7 @@ public class LoginFrame extends BaseFrame {
 
 		south.add(login);
 		south.add(reset);
-		
-		
+
 		add(south, BorderLayout.SOUTH);
 		add(center, BorderLayout.CENTER);
 

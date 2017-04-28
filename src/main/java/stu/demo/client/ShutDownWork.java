@@ -1,12 +1,12 @@
 package stu.demo.client;
 
-import stu.demo.client.message.Connection;
+import stu.demo.client.message.MessageManager;
 
 public class ShutDownWork extends Thread {
 
 	@Override
 	public void run() {
-		Connection.shutdown();
+		MessageManager.shutdown();
 	}
 
 }
