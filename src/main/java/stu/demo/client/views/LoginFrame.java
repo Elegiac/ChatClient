@@ -1,9 +1,6 @@
 package stu.demo.client.views;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +21,8 @@ public class LoginFrame extends BaseFrame {
 
 	private static LoginFrame loginFrame;
 
+	public static Object loginFlag = new Object();
+
 	private LoginFrame(int width, int height) {
 		super(width, height, "login");
 
@@ -40,13 +39,15 @@ public class LoginFrame extends BaseFrame {
 		final JTextField userNameInput = new JTextField();
 		final JPasswordField passwordInput = new JPasswordField();
 
-		Font font = new Font("黑体", Font.BOLD, 20);
-		
-		userNameInput.setFont(font);
+		// Font font = new Font("微软雅黑", Font.PLAIN, 20);
 
-		userNameInput.setOpaque(false);
-		passwordInput.setOpaque(false);
-		
+		// userNameInput.setFont(font);
+		// userNameInput.setForeground(Color.BLACK);
+		// userNameInput.setOpaque(false);
+		// passwordInput.setOpaque(false);
+
+		// userNameInput.setBackground (Color.WHITE);
+
 		JButton login = new JButton("login");
 		JButton reset = new JButton("reset");
 
@@ -58,11 +59,17 @@ public class LoginFrame extends BaseFrame {
 
 				Login login = new Login(loginName, password);
 
-				String receiveMessage = MessageManager.sendMessgaeAndReply(JsonUtil.objectToJson(login));
-				System.out.println(receiveMessage);
+				MessageManager.sendMessgae(JsonUtil.objectToJson(login));
+
+				synchronized (loginFlag) {
+					try {
+						loginFlag.wait();
+					} catch (InterruptedException e1) {
+					}
+				}
 			}
 		});
-		
+
 		reset.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -119,6 +126,10 @@ public class LoginFrame extends BaseFrame {
 			}
 			loginFrame = new LoginFrame(size, size);
 		}
+	}
+
+	public static void close() {
+		loginFrame.dispose();
 	}
 
 	public static void main(String[] args) {

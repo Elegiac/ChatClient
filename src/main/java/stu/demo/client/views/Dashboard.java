@@ -30,8 +30,7 @@ public class Dashboard extends BaseFrame {
 		messageViewArea.setLineWrap(true);// 激活自动换行功能
 		messageViewArea.setWrapStyleWord(true);// 激活断行不断字功能
 		messageViewArea.setEditable(false);
-		messageViewContainer.add(new JScrollPane(messageViewArea),
-				BorderLayout.CENTER);
+		messageViewContainer.add(new JScrollPane(messageViewArea), BorderLayout.CENTER);
 
 		JPanel messageInputContainer = new JPanel();
 		messageInputContainer.setLayout(new BorderLayout());
@@ -41,8 +40,7 @@ public class Dashboard extends BaseFrame {
 		messageInputArea.setFont(new Font("标楷体", Font.BOLD, 16));
 		messageInputArea.setLineWrap(true);// 激活自动换行功能
 		messageInputArea.setWrapStyleWord(true);// 激活断行不断字功能
-		messageInputContainer.add(new JScrollPane(messageInputArea),
-				BorderLayout.CENTER);
+		messageInputContainer.add(new JScrollPane(messageInputArea), BorderLayout.CENTER);
 
 		JButton sendButton = new JButton("SEND");
 
@@ -51,11 +49,8 @@ public class Dashboard extends BaseFrame {
 			public void actionPerformed(ActionEvent e) {
 				String sendMessage = messageInputArea.getText();
 				messageInputArea.setText("");
-				String receiveMessage = MessageManager
-						.sendMessgaeAndReply(sendMessage);
+				MessageManager.sendMessgae(sendMessage);
 				messageViewArea.append("Me:" + sendMessage);
-				messageViewArea.append("\r\n");
-				messageViewArea.append("Target:" + receiveMessage);
 				messageViewArea.append("\r\n");
 			}
 		});
