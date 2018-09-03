@@ -16,7 +16,7 @@ public class MessageManager {
 			b.group(group).channel(NioSocketChannel.class).handler(new StringClientInitializer());
 
 			// 连接服务端
-			channel = b.connect("127.0.0.1", 8878).sync().channel();
+			channel = b.connect("127.0.0.1", 8888).sync().channel();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			shutdown();

@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import edu.demo.common.entity.User;
 import edu.demo.common.entity.action.Login;
 import edu.demo.common.utils.JsonUtil;
 import stu.demo.client.message.MessageManager;
@@ -22,6 +23,10 @@ public class LoginFrame extends BaseFrame {
 	private static LoginFrame loginFrame;
 
 	public static Object loginFlag = new Object();
+	
+	public static User CURRENT_USER;
+	
+	public static User CHAT_TO;
 
 	private LoginFrame(int width, int height) {
 		super(width, height, "login");
